@@ -160,9 +160,9 @@ namespace BlackJackGame
 
             if (nbrJoueurs > 0)
             {
-                if(scoreJoueur1 > valCartesIA && scoreJoueur1 <= 21)
+                if(valCartesIA > 21)
                 {
-                    if(scoreJoueur1 == 21)
+                    if (scoreJoueur1 == 21)
                     {
                         miseTab[0] = miseTab[0] * 4;
                         balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
@@ -173,11 +173,36 @@ namespace BlackJackGame
                         balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
                     }
                 }
+                else if(scoreJoueur1 > valCartesIA && scoreJoueur1 <= 21)
+                {
+                        if (scoreJoueur1 == 21)
+                        {
+                            miseTab[0] = miseTab[0] * 4;
+                            balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                        }
+                        else
+                        {
+                            miseTab[0] = miseTab[0] * 2;
+                            balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                        }
+                }
             }
-
             if (nbrJoueurs > 1)
             {
-                if (scoreJoueur2 > valCartesIA && scoreJoueur2 <= 21)
+                if (valCartesIA > 21)
+                {
+                    if (scoreJoueur2 == 21)
+                    {
+                        miseTab[1] = miseTab[1] * 4;
+                        balanceJoueurs[1, 0] = balanceJoueurs[1, 0] + miseTab[1];
+                    }
+                    else
+                    {
+                        miseTab[1] = miseTab[1] * 2;
+                        balanceJoueurs[1, 0] = balanceJoueurs[1, 0] + miseTab[1];
+                    }
+                }
+                else if (scoreJoueur2 > valCartesIA && scoreJoueur2 <= 21)
                 {
                     if (scoreJoueur2 == 21)
                     {
@@ -193,7 +218,20 @@ namespace BlackJackGame
             }
             if (nbrJoueurs > 2)
             {
-                if (scoreJoueur3 > valCartesIA && scoreJoueur3 <= 21)
+
+                if (valCartesIA > 21)
+                {
+                    if (scoreJoueur3 == 21)
+                    {
+                        miseTab[2] = miseTab[2] * 4;
+                        balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
+                    }
+                    else
+                    {
+                        miseTab[2] = miseTab[2] * 2;
+                        balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
+                    }
+                }else if(scoreJoueur3 > valCartesIA && scoreJoueur3 <= 21)
                 {
                     if (scoreJoueur3 == 21)
                     {
@@ -206,11 +244,22 @@ namespace BlackJackGame
                         balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
                     }
                 }
-
             }
             if (nbrJoueurs > 3)
             {
-                if (scoreJoueur4 > valCartesIA && scoreJoueur2 <= 21)
+                if (valCartesIA > 21)
+                {
+                    if (scoreJoueur4 == 21)
+                    {
+                        miseTab[3] = miseTab[3] * 4;
+                        balanceJoueurs[3, 0] = balanceJoueurs[3, 0] + miseTab[3];
+                    }
+                    else
+                    {
+                        miseTab[3] = miseTab[3] * 2;
+                        balanceJoueurs[3, 0] = balanceJoueurs[3, 0] + miseTab[3];
+                    }
+                }else if(scoreJoueur4 > valCartesIA && scoreJoueur2 <= 21)
                 {
                     if (scoreJoueur4 == 21)
                     {
@@ -263,6 +312,7 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
             string[] cartes = { "Trèfles", "Piques", "Coeurs", "Carreaux" };
             int[] valCartes = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int[] miseTab;
+            string restart = "Y";
             do
             {
 
@@ -285,63 +335,105 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
                 tourAddBalance = tourAddBalance + 1;
             }
 
-            affichageMatriceBalance(balanceJoueurs);
-
-            mise(ref balanceJoueurs, out miseTab, nbrJoueurs);
-            while (n < nbrJoueurs)
+            while (restart == "Y" && )
             {
-                Console.WriteLine(n);
-                
+                cartesIA = "";
+                valCartesIA = 0;
+                n = 0;
+
                 affichageMatriceBalance(balanceJoueurs);
-                distribCartesJoueurs(cartes, valCartes,ref cartesJoueurs, nbrJoueurs, n);
 
-                n = n + 1;
-                play = "Y";
-            }
+                mise(ref balanceJoueurs, out miseTab, nbrJoueurs);
+                while (n < nbrJoueurs)
+                {
+                    Console.WriteLine(n);
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n\nIA : \n");
+                    affichageMatriceBalance(balanceJoueurs);
+                    distribCartesJoueurs(cartes, valCartes, ref cartesJoueurs, nbrJoueurs, n);
 
-            while (valCartesIA <= 16)
-            {
+                    n = n + 1;
+                    play = "Y";
+                }
+
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("tour : " + " " + (tourIA + 1) + "\n");
-                distribCartesIA(cartes, valCartes, ref cartesIA, ref valCartesIA, n);
-                Console.WriteLine(valCartesIA + "\n");
-                Console.WriteLine(cartesIA + "\n");
-                tourIA = tourIA + 1;
-            }
+                Console.WriteLine("\n\nIA : \n");
 
-            Console.ForegroundColor = ConsoleColor.Green;
+                while (valCartesIA <= 16)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("tour : " + " " + (tourIA + 1) + "\n");
+                    distribCartesIA(cartes, valCartes, ref cartesIA, ref valCartesIA, n);
+                    Console.WriteLine(valCartesIA + "\n");
+                    Console.WriteLine(cartesIA + "\n");
+                    tourIA = tourIA + 1;
+                }
 
-            affichageMatrice(cartesJoueurs);
+                Console.ForegroundColor = ConsoleColor.Green;
 
-            calcScoreJoueurs(cartesJoueurs, out scoreJoueur1, out scoreJoueur2, out scoreJoueur3, out scoreJoueur4);
+                affichageMatrice(cartesJoueurs);
 
-            if(nbrJoueurs > 0)
-            {
-                Console.WriteLine("Le score du joueur 1 est de :" + " " + scoreJoueur1);
-            }
-            if(nbrJoueurs > 1)
-            {
-                Console.WriteLine("Le score du joueur 2 est de :" + " " + scoreJoueur2);
-            }
-            if(nbrJoueurs > 2)
-            {
-                Console.WriteLine("Le score du joueur 3 est de :" + " " + scoreJoueur3);
+                calcScoreJoueurs(cartesJoueurs, out scoreJoueur1, out scoreJoueur2, out scoreJoueur3, out scoreJoueur4);
+
+                if (nbrJoueurs > 0)
+                {
+                    Console.WriteLine("Le score du joueur 1 est de :" + " " + scoreJoueur1);
+                }
+                if (nbrJoueurs > 1)
+                {
+                    Console.WriteLine("Le score du joueur 2 est de :" + " " + scoreJoueur2);
+                }
+                if (nbrJoueurs > 2)
+                {
+                    Console.WriteLine("Le score du joueur 3 est de :" + " " + scoreJoueur3);
+
+                }
+                if (nbrJoueurs > 3)
+                {
+                    Console.WriteLine("Le score du joueur 4 est de :" + " " + scoreJoueur4);
+                }
+
+                DistribGains(scoreJoueur1, scoreJoueur2, scoreJoueur3, scoreJoueur4, valCartesIA, nbrJoueurs, ref balanceJoueurs, miseTab);
+
+                if (nbrJoueurs > 0)
+                {
+                   if(balanceJoueurs[0,0] > 0)
+                    {
+                        // ok
+                    }
+                }
+                if (nbrJoueurs > 1)
+                {
+                    if (balanceJoueurs[1, 0] > 0)
+                    {
+                        // ok
+                    }
+                }
+                if (nbrJoueurs > 2)
+                {
+                    if (balanceJoueurs[2, 0] > 0)
+                    {
+                        // ok
+                    }
+
+                }
+                if (nbrJoueurs > 3)
+                {
+                    if (balanceJoueurs[3, 0] > 0)
+                    {
+                        // ok
+                    }
+                }
+
+                affichageMatriceBalance(balanceJoueurs);
+
+
+                Console.WriteLine("Voulez vous rejouez ? Y/N");
+                restart = Console.ReadLine();
+
                 
             }
-            if(nbrJoueurs > 3)
-            {
-                Console.WriteLine("Le score du joueur 4 est de :" + " " + scoreJoueur4);
-            }
 
-            DistribGains(scoreJoueur1, scoreJoueur2, scoreJoueur3, scoreJoueur4, valCartesIA, nbrJoueurs, ref balanceJoueurs, miseTab);
-
-            affichageMatriceBalance(balanceJoueurs);
-
-
-            Console.ReadLine();
+            
         }
     }
 }

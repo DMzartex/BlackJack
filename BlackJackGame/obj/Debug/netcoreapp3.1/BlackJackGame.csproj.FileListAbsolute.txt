@@ -39,3 +39,16 @@ E:\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.csproj.CoreCompileInputs.
 E:\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.dll
 E:\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.pdb
 E:\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.genruntimeconfig.cache
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.exe
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.deps.json
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.runtimeconfig.json
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.runtimeconfig.dev.json
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.dll
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.pdb
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.csprojAssemblyReference.cache
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.AssemblyInfoInputs.cache
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.AssemblyInfo.cs
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.csproj.CoreCompileInputs.cache
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.dll
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.pdb
+C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.genruntimeconfig.cache
