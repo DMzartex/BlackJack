@@ -155,8 +155,38 @@ namespace BlackJackGame
 
         }
 
-        static void DistribGains(int scoreJoueur1, int scoreJoueur2, int scoreJoueur3, int scoreJoueur4, int valCartesIA, int nbrJoueurs, ref int[,] balanceJoueurs, int[] miseTab)
+        static void DistribGains(int[] scoreJoueur, int valCartesIA, int nbrJoueurs, ref int[,] balanceJoueurs, int[] miseTab)
         {
+            for(int i = 0; i < nbrJoueurs; i++)
+            {
+                int scoreJoueur = scoreJoueur[i];
+                if (valCartesIA > 21)
+                {
+                    if (scoreJoueur1 == 21)
+                    {
+                        miseTab[i] = miseTab[i] * 4;
+                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                    }
+                    else
+                    {
+                        miseTab[0] = miseTab[0] * 2;
+                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                    }
+                }
+                else if (scoreJoueur1 > valCartesIA && scoreJoueur1 <= 21)
+                {
+                    if (scoreJoueur1 == 21)
+                    {
+                        miseTab[0] = miseTab[0] * 4;
+                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                    }
+                    else
+                    {
+                        miseTab[0] = miseTab[0] * 2;
+                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                    }
+                }
+            }
 
             if (nbrJoueurs > 0)
             {
