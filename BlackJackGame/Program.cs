@@ -5,7 +5,7 @@ namespace BlackJackGame
     class Program
     {
 
-        static void distribCartesJoueurs(string[] cartes, int[] valCartes,ref int[,] cartesJoueurs, int nbrJoueurs, int n)
+        static void distribCartesJoueurs(string[] cartes, int[] valCartes,ref int[,] cartesJoueurs, int bJoueurs, int n)
         {
            
             int valCarteJoueur;
@@ -68,10 +68,10 @@ namespace BlackJackGame
            
         }
 
-        static void balance(ref int[,] balanceJoueurs, int nbrJoueurs)
+        static void balance(ref int[,] balanceJoueurs, int bJoueurs)
         {
             // parcourir les lignes de la matrice ( les joueurs)
-            for (int x = 0; x < nbrJoueurs; x++)
+            for (int x = 0; x < bJoueurs; x++)
             {
                 // parcourir les colonnes de la matrice ( les sommes de la balance)
                 for (int y = 0; y < balanceJoueurs.GetLength(1); y++)
@@ -83,12 +83,12 @@ namespace BlackJackGame
 
         }
 
-        static void mise(ref int[,] balanceJoueurs, out int[] miseTab, int nbrJoueurs)
+        static void mise(ref int[,] balanceJoueurs, out int[] miseTab, int bJoueurs)
         {
             miseTab = new int[4];
             
 
-            for(int i = 0; i < nbrJoueurs; i++)
+            for(int i = 0; i < bJoueurs; i++)
             {
                 Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
                 int mise = int.Parse(Console.ReadLine());
@@ -124,11 +124,11 @@ namespace BlackJackGame
             }
         }
 
-        static void calcScoreJoueurs(int nbrJoueurs, int[,] cartesJoueurs, ref int[] scoreJoueurs)
+        static void calcScoreJoueurs(int bJoueurs, int[,] cartesJoueurs, ref int[] scoreJoueurs)
         {
             scoreJoueurs = new int[4];
 
-            for(int n = 0; n < nbrJoueurs; n++)
+            for(int n = 0; n < bJoueurs; n++)
             {
                 for (int y = 0; y < cartesJoueurs.GetLength(0); y++)
                 {
@@ -146,10 +146,10 @@ namespace BlackJackGame
 
        
 
-        static void DistribGains(int valCartesIA, int nbrJoueurs, ref int[,] balanceJoueurs, int[] miseTab, ref int[] scoreJoueurs)
+        static void DistribGains(int valCartesIA, int bJoueurs, ref int[,] balanceJoueurs, int[] miseTab, ref int[] scoreJoueurs)
         {
            
-            for(int n = 0; n < nbrJoueurs; n++)
+            for(int n = 0; n < bJoueurs; n++)
             {
                 if (valCartesIA > 21 && scoreJoueurs[n] <= 21)
                 {
@@ -181,9 +181,9 @@ namespace BlackJackGame
             }
         }
 
-        static void affichageScore(int nbrJoueurs,ref int[] scoreJoueurs)
+        static void affichageScore(int bJoueurs,ref int[] scoreJoueurs)
         { 
-            for (int n = 0; n < nbrJoueurs; n++)
+            for (int n = 0; n < bJoueurs; n++)
             {
                 Console.WriteLine("Le score du joueur" + " " + n + " est " + scoreJoueurs[n]);
             }
@@ -211,7 +211,7 @@ B:::::::::::::::::B l::::::la:::::aaaa::::::a c:::::::::::::::::ck::::::k  k::::
 B::::::::::::::::B  l::::::l a::::::::::aa:::a cc:::::::::::::::ck::::::k   k:::::k JJ:::::::::JJ    a::::::::::aa:::a cc:::::::::::::::ck::::::k   k:::::k 
 BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkkkkkk  JJJJJJJJJ       aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkkkkkk
                                                                                                  ");
-            int nbrJoueurs;
+            string nbrJoueurs;
             string play;
             int n = 0;
             int tourAddBalance = 0;
@@ -223,23 +223,24 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
             int[] valCartes = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int[] miseTab;
             string restart = "Y";
+            int bJoueurs;
             do
             {
 
                 Console.WriteLine("Entrer le nombre de joueurs ( max 4 joueurs ) : ");
-                nbrJoueurs = int.Parse(Console.ReadLine());
+                nbrJoueurs = Console.ReadLine();
             }
-            while (nbrJoueurs > 4);
+            while (!int.TryParse(nbrJoueurs, out bJoueurs));
             
 
-            int[,] cartesJoueurs = new int[nbrJoueurs, 6];
-            int[,] balanceJoueurs = new int[nbrJoueurs,1];
+            int[,] cartesJoueurs = new int[bJoueurs, 6];
+            int[,] balanceJoueurs = new int[bJoueurs,1];
 
-            while (tourAddBalance < nbrJoueurs)
+            while (tourAddBalance < bJoueurs)
             {
                 if (n == 0)
                 {
-                    balance(ref balanceJoueurs, nbrJoueurs);
+                    balance(ref balanceJoueurs, bJoueurs);
                 }
 
                 tourAddBalance = tourAddBalance + 1;
@@ -253,13 +254,13 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
 
                 affichageMatriceBalance(balanceJoueurs);
 
-                mise(ref balanceJoueurs, out miseTab, nbrJoueurs);
-                while (n < nbrJoueurs)
+                mise(ref balanceJoueurs, out miseTab, bJoueurs);
+                while (n < bJoueurs)
                 {
                     Console.WriteLine(n);
 
                     affichageMatriceBalance(balanceJoueurs);
-                    distribCartesJoueurs(cartes, valCartes, ref cartesJoueurs, nbrJoueurs, n);
+                    distribCartesJoueurs(cartes, valCartes, ref cartesJoueurs, bJoueurs, n);
 
                     n = n + 1;
                     play = "Y";
@@ -282,27 +283,27 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
 
                 affichageMatrice(cartesJoueurs);
 
-                calcScoreJoueurs(nbrJoueurs, cartesJoueurs, ref scoreJoueurs);
+                calcScoreJoueurs(bJoueurs, cartesJoueurs, ref scoreJoueurs);
 
-                DistribGains(valCartesIA, nbrJoueurs, ref balanceJoueurs, miseTab, ref scoreJoueurs);
+                DistribGains(valCartesIA, bJoueurs, ref balanceJoueurs, miseTab, ref scoreJoueurs);
 
-                affichageScore(nbrJoueurs, ref scoreJoueurs);
+                affichageScore(bJoueurs, ref scoreJoueurs);
 
-                if (nbrJoueurs > 0)
+                if (bJoueurs > 0)
                 {
                    if(balanceJoueurs[0,0] > 0)
                     {
                         // ok
                     }
                 }
-                if (nbrJoueurs > 1)
+                if (bJoueurs > 1)
                 {
                     if (balanceJoueurs[1, 0] > 0)
                     {
                         // ok
                     }
                 }
-                if (nbrJoueurs > 2)
+                if (bJoueurs > 2)
                 {
                     if (balanceJoueurs[2, 0] > 0)
                     {
@@ -310,7 +311,7 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
                     }
 
                 }
-                if (nbrJoueurs > 3)
+                if (bJoueurs > 3)
                 {
                     if (balanceJoueurs[3, 0] > 0)
                     {
