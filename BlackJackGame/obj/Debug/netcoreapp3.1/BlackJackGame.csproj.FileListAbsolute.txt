@@ -52,3 +52,17 @@ C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJac
 C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.dll
 C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.pdb
 C:\Users\190478\Desktop\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.genruntimeconfig.cache
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.csproj.AssemblyReference.cache
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.AssemblyInfoInputs.cache
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.AssemblyInfo.cs
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.csproj.CoreCompileInputs.cache
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.dll
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.pdb
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.exe
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.deps.json
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.runtimeconfig.json
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.runtimeconfig.dev.json
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.dll
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\bin\Debug\netcoreapp3.1\BlackJackGame.pdb
+C:\Users\Doria\OneDrive\Bureau\BlackJack\BlackJackGame\obj\Debug\netcoreapp3.1\BlackJackGame.genruntimeconfig.cache

@@ -124,186 +124,69 @@ namespace BlackJackGame
             }
         }
 
-        static void calcScoreJoueurs(int[,] cartesJoueurs, out int scoreJoueur1, out int scoreJoueur2, out int scoreJoueur3, out int scoreJoueur4)
+        static void calcScoreJoueurs(int nbrJoueurs, int[,] cartesJoueurs, ref int[] scoreJoueurs)
         {
-            scoreJoueur1 = 0;
-            scoreJoueur2 = 0;
-            scoreJoueur3 = 0;
-            scoreJoueur4 = 0;
+            scoreJoueurs = new int[4];
 
-            for(int y = 0; y < cartesJoueurs.GetLength(0); y++)
+            for(int n = 0; n < nbrJoueurs; n++)
             {
-                for(int x = 0; x < cartesJoueurs.GetLength(1); x++)
+                for (int y = 0; y < cartesJoueurs.GetLength(0); y++)
                 {
-                    switch (y)
+                    for (int x = 0; x < cartesJoueurs.GetLength(1); x++)
                     {
-                        case 0:
-                            scoreJoueur1 = scoreJoueur1 + cartesJoueurs[y, x];
-                            break;
-                        case 1:
-                            scoreJoueur2 = scoreJoueur2 + cartesJoueurs[y, x];
-                            break;
-                        case 2:
-                            scoreJoueur3 = scoreJoueur3 + cartesJoueurs[y, x];
-                            break;
-                        case 3:
-                            scoreJoueur4 = scoreJoueur4 + cartesJoueurs[y, x];
-                            break;
+
+                        scoreJoueurs[y] =scoreJoueurs[y] + cartesJoueurs[y, x];
                     }
                 }
-            }
 
+            }
         }
 
-        static void DistribGains(int[] scoreJoueur, int valCartesIA, int nbrJoueurs, ref int[,] balanceJoueurs, int[] miseTab)
+            
+
+       
+
+        static void DistribGains(int valCartesIA, int nbrJoueurs, ref int[,] balanceJoueurs, int[] miseTab, ref int[] scoreJoueurs)
         {
-            for(int i = 0; i < nbrJoueurs; i++)
+           
+            for(int n = 0; n < nbrJoueurs; n++)
             {
-                int scoreJoueur = scoreJoueur[i];
-                if (valCartesIA > 21)
+                if (valCartesIA > 21 && scoreJoueurs[n] <= 21)
                 {
-                    if (scoreJoueur1 == 21)
+                    if (scoreJoueurs[n] == 21)
                     {
-                        miseTab[i] = miseTab[i] * 4;
-                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                        miseTab[n] = miseTab[n] * 4;
+                        balanceJoueurs[n, 0] = balanceJoueurs[n, 0] + miseTab[n];
                     }
                     else
                     {
-                        miseTab[0] = miseTab[0] * 2;
-                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                        miseTab[n] = miseTab[n] * 2;
+                        balanceJoueurs[n, 0] = balanceJoueurs[n, 0] + miseTab[n];
                     }
                 }
-                else if (scoreJoueur1 > valCartesIA && scoreJoueur1 <= 21)
+                else if (scoreJoueurs[n] > valCartesIA && scoreJoueurs[n] <= 21)
                 {
-                    if (scoreJoueur1 == 21)
+                    if (scoreJoueurs[n] == 21)
                     {
-                        miseTab[0] = miseTab[0] * 4;
-                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                        miseTab[n] = miseTab[n] * 4;
+                        balanceJoueurs[n, 0] = balanceJoueurs[n, 0] + miseTab[n];
                     }
                     else
                     {
-                        miseTab[0] = miseTab[0] * 2;
-                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
+                        miseTab[n] = miseTab[n] * 2;
+                        balanceJoueurs[n, 0] = balanceJoueurs[n, 0] + miseTab[n];
                     }
                 }
-            }
 
-            if (nbrJoueurs > 0)
-            {
-                if(valCartesIA > 21)
-                {
-                    if (scoreJoueur1 == 21)
-                    {
-                        miseTab[0] = miseTab[0] * 4;
-                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
-                    }
-                    else
-                    {
-                        miseTab[0] = miseTab[0] * 2;
-                        balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
-                    }
-                }
-                else if(scoreJoueur1 > valCartesIA && scoreJoueur1 <= 21)
-                {
-                        if (scoreJoueur1 == 21)
-                        {
-                            miseTab[0] = miseTab[0] * 4;
-                            balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
-                        }
-                        else
-                        {
-                            miseTab[0] = miseTab[0] * 2;
-                            balanceJoueurs[0, 0] = balanceJoueurs[0, 0] + miseTab[0];
-                        }
-                }
             }
-            if (nbrJoueurs > 1)
-            {
-                if (valCartesIA > 21)
-                {
-                    if (scoreJoueur2 == 21)
-                    {
-                        miseTab[1] = miseTab[1] * 4;
-                        balanceJoueurs[1, 0] = balanceJoueurs[1, 0] + miseTab[1];
-                    }
-                    else
-                    {
-                        miseTab[1] = miseTab[1] * 2;
-                        balanceJoueurs[1, 0] = balanceJoueurs[1, 0] + miseTab[1];
-                    }
-                }
-                else if (scoreJoueur2 > valCartesIA && scoreJoueur2 <= 21)
-                {
-                    if (scoreJoueur2 == 21)
-                    {
-                        miseTab[1] = miseTab[1] * 4;
-                        balanceJoueurs[1, 0] = balanceJoueurs[1, 0] + miseTab[1];
-                    }
-                    else
-                    {
-                        miseTab[1] = miseTab[1] * 2;
-                        balanceJoueurs[1, 0] = balanceJoueurs[1, 0] + miseTab[1];
-                    }
-                }
-            }
-            if (nbrJoueurs > 2)
-            {
+        }
 
-                if (valCartesIA > 21)
-                {
-                    if (scoreJoueur3 == 21)
-                    {
-                        miseTab[2] = miseTab[2] * 4;
-                        balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
-                    }
-                    else
-                    {
-                        miseTab[2] = miseTab[2] * 2;
-                        balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
-                    }
-                }else if(scoreJoueur3 > valCartesIA && scoreJoueur3 <= 21)
-                {
-                    if (scoreJoueur3 == 21)
-                    {
-                        miseTab[2] = miseTab[2] * 4;
-                        balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
-                    }
-                    else
-                    {
-                        miseTab[2] = miseTab[2] * 2;
-                        balanceJoueurs[2, 0] = balanceJoueurs[2, 0] + miseTab[2];
-                    }
-                }
-            }
-            if (nbrJoueurs > 3)
+        static void affichageScore(int nbrJoueurs,ref int[] scoreJoueurs)
+        { 
+            for (int n = 0; n < nbrJoueurs; n++)
             {
-                if (valCartesIA > 21)
-                {
-                    if (scoreJoueur4 == 21)
-                    {
-                        miseTab[3] = miseTab[3] * 4;
-                        balanceJoueurs[3, 0] = balanceJoueurs[3, 0] + miseTab[3];
-                    }
-                    else
-                    {
-                        miseTab[3] = miseTab[3] * 2;
-                        balanceJoueurs[3, 0] = balanceJoueurs[3, 0] + miseTab[3];
-                    }
-                }else if(scoreJoueur4 > valCartesIA && scoreJoueur2 <= 21)
-                {
-                    if (scoreJoueur4 == 21)
-                    {
-                        miseTab[3] = miseTab[3] * 4;
-                        balanceJoueurs[3, 0] = balanceJoueurs[3, 0] + miseTab[3];
-                    }
-                    else
-                    {
-                        miseTab[3] = miseTab[3] * 2;
-                        balanceJoueurs[3, 0] = balanceJoueurs[3, 0] + miseTab[3];
-                    }
-                }
+                Console.WriteLine("Le score du joueur" + " " + n + " est " + scoreJoueurs[n]);
             }
-
         }
 
 
@@ -332,10 +215,7 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
             string play;
             int n = 0;
             int tourAddBalance = 0;
-            int scoreJoueur1;
-            int scoreJoueur2;
-            int scoreJoueur3;
-            int scoreJoueur4;
+            int[] scoreJoueurs = new int[4];
             int tourIA = 0;
             string cartesIA = "";
             int valCartesIA = 0;
@@ -365,7 +245,7 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
                 tourAddBalance = tourAddBalance + 1;
             }
 
-            while (restart == "Y" && )
+            while (restart == "Y")
             {
                 cartesIA = "";
                 valCartesIA = 0;
@@ -402,27 +282,11 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
 
                 affichageMatrice(cartesJoueurs);
 
-                calcScoreJoueurs(cartesJoueurs, out scoreJoueur1, out scoreJoueur2, out scoreJoueur3, out scoreJoueur4);
+                calcScoreJoueurs(nbrJoueurs, cartesJoueurs, ref scoreJoueurs);
 
-                if (nbrJoueurs > 0)
-                {
-                    Console.WriteLine("Le score du joueur 1 est de :" + " " + scoreJoueur1);
-                }
-                if (nbrJoueurs > 1)
-                {
-                    Console.WriteLine("Le score du joueur 2 est de :" + " " + scoreJoueur2);
-                }
-                if (nbrJoueurs > 2)
-                {
-                    Console.WriteLine("Le score du joueur 3 est de :" + " " + scoreJoueur3);
+                DistribGains(valCartesIA, nbrJoueurs, ref balanceJoueurs, miseTab, ref scoreJoueurs);
 
-                }
-                if (nbrJoueurs > 3)
-                {
-                    Console.WriteLine("Le score du joueur 4 est de :" + " " + scoreJoueur4);
-                }
-
-                DistribGains(scoreJoueur1, scoreJoueur2, scoreJoueur3, scoreJoueur4, valCartesIA, nbrJoueurs, ref balanceJoueurs, miseTab);
+                affichageScore(nbrJoueurs, ref scoreJoueurs);
 
                 if (nbrJoueurs > 0)
                 {
