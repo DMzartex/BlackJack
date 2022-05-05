@@ -5,12 +5,12 @@ namespace BlackJackGame
     class Program
     {
 
-        static void distribCartesJoueurs(string[] cartes, int[] valCartes,ref int[,] cartesJoueurs, int bJoueurs, int n)
+        static void distribCartesJoueurs(string[] cartes, int[] valCartes,ref int[,] cartesJoueurs, int bJoueurs, int n, out string play)
         {
            
             int valCarteJoueur;
-            string TypeCarteJoueur;
-            string play = "Y";
+            string typeCarteJoueur;
+            play = "Y";
             Random rnd = new Random();
 
             int sommeCartes = 0;
@@ -24,11 +24,11 @@ namespace BlackJackGame
                 int carteRandom = rnd.Next(0, 4);
 
                 valCarteJoueur = valCartes[nbrRandom];
-                TypeCarteJoueur = cartes[carteRandom];
+                typeCarteJoueur = cartes[carteRandom];
 
                 sommeCartes = sommeCartes + valCarteJoueur;
 
-                carteJoueur = valCarteJoueur + " " + TypeCarteJoueur;
+                carteJoueur = valCarteJoueur + " " + typeCarteJoueur;
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Votre carte est " + " " + carteJoueur);
@@ -37,7 +37,8 @@ namespace BlackJackGame
                 Console.WriteLine("Votre total est de : " + " " + sommeCartes);
 
                 
-
+               
+                
                 cartesJoueurs[n, y] = valCarteJoueur;
 
                 Console.ForegroundColor = ConsoleColor.White;
@@ -50,6 +51,19 @@ namespace BlackJackGame
                 
             }
         }
+
+       static void remiseAZeroMatriceCarte(string restart, ref int[,] cartesJoueurs)
+        {
+            for(int y = 0; y < cartesJoueurs.GetLength(0); y++)
+            {
+                for(int x = 0; x < cartesJoueurs.GetLength(1); x++)
+                {
+                    cartesJoueurs[y, x] = 0;
+                }
+            }
+        }
+
+        
 
         static void distribCartesIA(string[] cartes, int[] valCartes, ref string cartesIA, ref int valCartesIA, int n)
         {
@@ -260,10 +274,10 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
                     Console.WriteLine(n);
 
                     affichageMatriceBalance(balanceJoueurs);
-                    distribCartesJoueurs(cartes, valCartes, ref cartesJoueurs, bJoueurs, n);
+                    remiseAZeroMatriceCarte(restart, ref cartesJoueurs);
+                    distribCartesJoueurs(cartes, valCartes, ref cartesJoueurs, bJoueurs, n,out play);
 
                     n = n + 1;
-                    play = "Y";
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
