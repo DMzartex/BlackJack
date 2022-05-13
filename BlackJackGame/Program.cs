@@ -52,7 +52,7 @@ namespace BlackJackGame
             }
         }
 
-       static void remiseAZeroMatriceCarte(string restart, ref int[,] cartesJoueurs)
+      static void remiseAZeroMatriceCarte(string restart, ref int[,] cartesJoueurs)
         {
             for(int y = 0; y < cartesJoueurs.GetLength(0); y++)
             {
@@ -104,10 +104,24 @@ namespace BlackJackGame
 
             for(int i = 0; i < bJoueurs; i++)
             {
-                Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
-                int mise = int.Parse(Console.ReadLine());
-                balanceJoueurs[i, 0] = balanceJoueurs[i, 0] - mise;
-                miseTab[i] = mise;
+                int mise;
+                do
+                {
+                    Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
+                    mise = int.Parse(Console.ReadLine());
+
+                } while (mise > balanceJoueurs[i, 0]);
+
+
+                if (balanceJoueurs[i, 0] != 0)
+                {
+                    balanceJoueurs[i, 0] = balanceJoueurs[i, 0] - mise;
+                    miseTab[i] = mise;
+                }
+                else
+                {
+                    Console.WriteLine("Vous n'avez plus assez d'argent pour pouvoir jouer !");
+                }
             }
 
 
@@ -140,10 +154,9 @@ namespace BlackJackGame
 
         static void calcScoreJoueurs(int bJoueurs, int[,] cartesJoueurs, ref int[] scoreJoueurs)
         {
-            scoreJoueurs = new int[4];
+            scoreJoueurs = new int[bJoueurs];
 
-            for(int n = 0; n < bJoueurs; n++)
-            {
+          
                 for (int y = 0; y < cartesJoueurs.GetLength(0); y++)
                 {
                     for (int x = 0; x < cartesJoueurs.GetLength(1); x++)
@@ -153,7 +166,7 @@ namespace BlackJackGame
                     }
                 }
 
-            }
+            
         }
 
             
@@ -236,8 +249,9 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
             string[] cartes = { "Trèfles", "Piques", "Coeurs", "Carreaux" };
             int[] valCartes = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int[] miseTab;
-            string restart = "Y";
+            string restart = "y";
             int bJoueurs;
+            float brestart;
             do
             {
 
@@ -260,8 +274,9 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
                 tourAddBalance = tourAddBalance + 1;
             }
 
-            while (restart == "Y")
+            while (restart == "y" || restart == "Y")
             {
+                restart = "";
                 cartesIA = "";
                 valCartesIA = 0;
                 n = 0;
@@ -269,12 +284,12 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
                 affichageMatriceBalance(balanceJoueurs);
 
                 mise(ref balanceJoueurs, out miseTab, bJoueurs);
+                
                 while (n < bJoueurs)
                 {
                     Console.WriteLine(n);
 
                     affichageMatriceBalance(balanceJoueurs);
-                    remiseAZeroMatriceCarte(restart, ref cartesJoueurs);
                     distribCartesJoueurs(cartes, valCartes, ref cartesJoueurs, bJoueurs, n,out play);
 
                     n = n + 1;
@@ -303,41 +318,24 @@ BBBBBBBBBBBBBBBBB   llllllll  aaaaaaaaaa  aaaa   cccccccccccccccckkkkkkkk    kkk
 
                 affichageScore(bJoueurs, ref scoreJoueurs);
 
-                if (bJoueurs > 0)
-                {
-                   if(balanceJoueurs[0,0] > 0)
-                    {
-                        // ok
-                    }
-                }
-                if (bJoueurs > 1)
-                {
-                    if (balanceJoueurs[1, 0] > 0)
-                    {
-                        // ok
-                    }
-                }
-                if (bJoueurs > 2)
-                {
-                    if (balanceJoueurs[2, 0] > 0)
-                    {
-                        // ok
-                    }
+                remiseAZeroMatriceCarte(restart, ref cartesJoueurs);
 
-                }
-                if (bJoueurs > 3)
-                {
-                    if (balanceJoueurs[3, 0] > 0)
-                    {
-                        // ok
-                    }
-                }
 
                 affichageMatriceBalance(balanceJoueurs);
 
 
-                Console.WriteLine("Voulez vous rejouez ? Y/N");
-                restart = Console.ReadLine();
+                while (restart != "Y" && restart != "N")
+                {
+                    do
+                    {
+
+                        Console.WriteLine("Voulez vous rejouez ? Y/N");
+                        restart = Console.ReadLine();
+
+                    } while (float.TryParse(restart, out brestart));
+                }
+              
+                
 
                 
             }
