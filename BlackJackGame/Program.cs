@@ -11,6 +11,7 @@ namespace BlackJackGame
             int valCarteJoueur;
             string typeCarteJoueur;
             play = "Y";
+            int bplay;
             Random rnd = new Random();
 
             int sommeCartes = 0;
@@ -45,8 +46,17 @@ namespace BlackJackGame
 
                 if(sommeCartes <= 21)
                 {
-                    Console.WriteLine("Voulez vous tirer à nouveau une carte joueur" + " " + (n + 1) + " ?" + "\n");
-                    play = Console.ReadLine();
+                    do
+                    {
+                        do
+                        {
+                            Console.WriteLine("Voulez vous tirer à nouveau une carte joueur" + " " + (n + 1) + " ? (Y/N)" + "\n");
+                            play = Console.ReadLine();
+
+                        } while (play != "Y" && play != "N");
+
+                    } while (int.TryParse(play, out bplay));
+                    
                 }
                 
             }
@@ -104,19 +114,26 @@ namespace BlackJackGame
 
             for(int i = 0; i < bJoueurs; i++)
             {
-                int mise;
+                string mise;
+                int bMise;
+
                 do
                 {
-                    Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
-                    mise = int.Parse(Console.ReadLine());
+                    do
+                    {
 
-                } while (mise > balanceJoueurs[i, 0]);
+                        Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
+                        mise = Console.ReadLine();
+                    
+                    } while (!int.TryParse(mise, out bMise));
+
+                } while (bMise > balanceJoueurs[i, 0]);
 
 
                 if (balanceJoueurs[i, 0] != 0)
                 {
-                    balanceJoueurs[i, 0] = balanceJoueurs[i, 0] - mise;
-                    miseTab[i] = mise;
+                    balanceJoueurs[i, 0] = balanceJoueurs[i, 0] - bMise;
+                    miseTab[i] = bMise;
                 }
                 else
                 {
