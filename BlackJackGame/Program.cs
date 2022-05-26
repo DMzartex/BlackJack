@@ -8,21 +8,21 @@ namespace BlackJackGame
         static void distribCartesJoueurs(string[] cartes, int[] valCartes,ref int[,] cartesJoueurs, int bJoueurs, int n, out string play)
         {
            
-            int valCarteJoueur;
-            string typeCarteJoueur;
-            play = "Y";
-            int bplay;
-            Random rnd = new Random();
+            int valCarteJoueur; // valeurs des cartes du joueur
+            string typeCarteJoueur; // type de carte du joueur 
+            play = "Y"; // démarrer la partie
+            int bplay; // variable de vérifications des entrées utilisateurs
+            Random rnd = new Random(); 
 
-            int sommeCartes = 0;
+            int sommeCartes = 0; // somme des cartes
 
             Console.WriteLine("joueur" + " " + (n + 1) + "\n");
 
-            for (int y = 0; y < cartesJoueurs.GetLength(1) && play == "Y" && sommeCartes <= 21; y++)
+            for (int y = 0; y < cartesJoueurs.GetLength(1) && play == "Y" && sommeCartes <= 21; y++) // boucle qui parcours les joueurs pour distribuer les cartes
             {
-                string carteJoueur = "";
-                int nbrRandom = rnd.Next(0, 9);
-                int carteRandom = rnd.Next(0, 4);
+                string carteJoueur = ""; // cartes des joueurs ( sous la forme "7 coeurs")
+                int nbrRandom = rnd.Next(0, 9); // valeur de la carte aléatoire
+                int carteRandom = rnd.Next(0, 4); // type de la carte aléatoire
 
                 valCarteJoueur = valCartes[nbrRandom];
                 typeCarteJoueur = cartes[carteRandom];
@@ -44,7 +44,7 @@ namespace BlackJackGame
 
                 Console.ForegroundColor = ConsoleColor.White;
 
-                if(sommeCartes <= 21)
+                if(sommeCartes <= 21) // verification des entrées utilisateur 
                 {
                     do
                     {
@@ -62,11 +62,11 @@ namespace BlackJackGame
             }
         }
 
-      static void remiseAZeroMatriceCarte(string restart, ref int[,] cartesJoueurs)
+      static void remiseAZeroMatriceCarte(string restart, ref int[,] cartesJoueurs) // fonction qui remet à zéro la matrice des cartes
         {
-            for(int y = 0; y < cartesJoueurs.GetLength(0); y++)
+            for(int y = 0; y < cartesJoueurs.GetLength(0); y++) // boucle qui parcour les lignes 
             {
-                for(int x = 0; x < cartesJoueurs.GetLength(1); x++)
+                for(int x = 0; x < cartesJoueurs.GetLength(1); x++) // boucle qui parcour les colonnes
                 {
                     cartesJoueurs[y, x] = 0;
                 }
@@ -75,7 +75,7 @@ namespace BlackJackGame
 
         
 
-        static void distribCartesIA(string[] cartes, int[] valCartes, ref string cartesIA, ref int valCartesIA, int n)
+        static void distribCartesIA(string[] cartes, int[] valCartes, ref string cartesIA, ref int valCartesIA, int n) // fonction qui distribue les cartes pour l'IA
         {
            
             
@@ -92,7 +92,7 @@ namespace BlackJackGame
            
         }
 
-        static void balance(ref int[,] balanceJoueurs, int bJoueurs)
+        static void balance(ref int[,] balanceJoueurs, int bJoueurs) // fonction qui rempli la balance de chaque joueurs avec 10 000 euros
         {
             // parcourir les lignes de la matrice ( les joueurs)
             for (int x = 0; x < bJoueurs; x++)
@@ -107,7 +107,7 @@ namespace BlackJackGame
 
         }
 
-        static void mise(ref int[,] balanceJoueurs, out int[] miseTab, int bJoueurs)
+        static void mise(ref int[,] balanceJoueurs, out int[] miseTab, int bJoueurs) // fonction qui permet au joueur de placer une mise
         {
             miseTab = new int[4];
             
@@ -119,20 +119,24 @@ namespace BlackJackGame
 
                 do
                 {
+
                     do
                     {
+                        do
+                        {
+                            Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
+                            mise = Console.ReadLine();
 
-                        Console.WriteLine("Joueur " + " " + (i + 1) + " " + "Entrez votre mise ( max 10 000 euros ) :");
-                        mise = Console.ReadLine();
-                    
-                    } while (!int.TryParse(mise, out bMise));
+                        } while (!int.TryParse(mise, out bMise));
 
-                } while (bMise > balanceJoueurs[i, 0]);
+                    } while (bMise > balanceJoueurs[i, 0]);
+
+                } while (bMise == 0) ;
 
 
                 if (balanceJoueurs[i, 0] != 0)
                 {
-                    balanceJoueurs[i, 0] = balanceJoueurs[i, 0] - bMise;
+                    balanceJoueurs[i, 0] = balanceJoueurs[i, 0] - bMise; // la balance du joueur moins la mise
                     miseTab[i] = bMise;
                 }
                 else
@@ -145,11 +149,11 @@ namespace BlackJackGame
         }
 
       
-        static void affichageMatrice(int[,] cartesJoueurs)
+        static void affichageMatrice(int[,] cartesJoueurs) // affichage de la matrice
         {
-            for (int n = 0; n < cartesJoueurs.GetLength(0); n++)
+            for (int n = 0; n < cartesJoueurs.GetLength(0); n++) // boucle qui parcours les lignes 
             {
-                for (int i = 0; i < cartesJoueurs.GetLength(1); i++)
+                for (int i = 0; i < cartesJoueurs.GetLength(1); i++) // boucle qui parcours les colonnes
                 {
                     Console.Write("  " + cartesJoueurs[n, i]);
                 }
@@ -157,7 +161,7 @@ namespace BlackJackGame
             }
         }
 
-        static void affichageMatriceBalance(int[,] balanceJoueurs)
+        static void affichageMatriceBalance(int[,] balanceJoueurs) // affichage de la matrice des balances
         {
             for (int n = 0; n < balanceJoueurs.GetLength(0); n++)
             {
@@ -169,7 +173,7 @@ namespace BlackJackGame
             }
         }
 
-        static void calcScoreJoueurs(int bJoueurs, int[,] cartesJoueurs, ref int[] scoreJoueurs)
+        static void calcScoreJoueurs(int bJoueurs, int[,] cartesJoueurs, ref int[] scoreJoueurs) // fonction qui calcule le score des joueurs
         {
             scoreJoueurs = new int[bJoueurs];
 
@@ -179,7 +183,7 @@ namespace BlackJackGame
                     for (int x = 0; x < cartesJoueurs.GetLength(1); x++)
                     {
 
-                        scoreJoueurs[y] =scoreJoueurs[y] + cartesJoueurs[y, x];
+                        scoreJoueurs[y] = scoreJoueurs[y] + cartesJoueurs[y, x]; //
                     }
                 }
 
